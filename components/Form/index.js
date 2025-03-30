@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Text, View, TextInput, TouchableOpacity,KeyboardAvoidingView, Platform } from "react-native";
+import { Text, View, Keyboard ,TextInput, TouchableOpacity,KeyboardAvoidingView, Platform } from "react-native";
 import styles from "./style";
 
 const Form = (props) =>{
@@ -10,7 +10,9 @@ const Form = (props) =>{
             alert("Please enter a task")
             return false;
         }
-        alert(props.onAddTask);
+        props.onAddTask(task);
+        setTask('');
+        Keyboard.dismiss();
     }
 
     return(
@@ -20,6 +22,7 @@ const Form = (props) =>{
             style={styles.addTask}
         >
             <TextInput 
+                value={task}
                 onChangeText={(text) => setTask(text)}
                 placeholder="Your task" 
                 style={styles.input} 
